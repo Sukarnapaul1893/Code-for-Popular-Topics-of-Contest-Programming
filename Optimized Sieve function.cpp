@@ -17,18 +17,18 @@ template <class T> inline T bigmod(T p,T e,T M){ll ret = 1LL;for(; e > 0LL; e >>
 template <class T> inline T modinverse(T a,T M){return bigmod(a,M-2,M);}   // M is prime}
 using namespace std;
 
-multiset <ll> prime;
+vector <ll> prime;
 bitset <10000010> bs;
 
 void sieve ()
 {
 	bs.set ();
-    prime.insert(2LL);
+        prime.pb(2LL);
 	for (ll i = 3; i < 10000000; i+=2)
 	{
 		if (bs[i])
 		{
-			prime.insert(i);
+			prime.pb(i);
 			for (ll j = i * i; j < 10000000; j += i+i)
 			{
 				bs[j] = 0;
