@@ -27,9 +27,9 @@ void sieve (int n){
 		if (bs[i])prime.pb(i);
 
 		for (int j = 0; j<prime.size() && i*prime[j]<=n; j++){
-            bs[i*prime[j]] = 0;
-            if(i%prime[j]==0)break;
-        }
+		    bs[i*prime[j]] = 0;
+		    if(i%prime[j]==0)break;
+		}
 	}
 }
 
