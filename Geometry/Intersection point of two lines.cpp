@@ -1,3 +1,4 @@
+//UVa 378 solution
 #pragma warning(disable:4786)
 #pragma warning(disable:4996)
 #include<bits/stdc++.h>
