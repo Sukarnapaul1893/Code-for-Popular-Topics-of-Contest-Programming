@@ -34,6 +34,7 @@ void insert(string s){
         p = TRIE[p][temp];
     }
 }
+//how many time string s is there as prefix
 int check(string s){
     int p=1;
 
