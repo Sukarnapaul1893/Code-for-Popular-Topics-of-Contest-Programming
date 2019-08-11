@@ -18,32 +18,43 @@ template <class T> inline T bigmod(T p,T e,T M){ll ret = 1LL;for(; e > 0LL; e >>
 template <class T> inline T modinverse(T a,T M){return bigmod(a,M-2,M);}   // M is prime}
 using namespace std;
 string ans="";
-int largest_prefix_suffix(string s, string s2) {
+int largest_prefix_suffix(string a, string b) {
 
-  int n = s.length();
-
-
-
-  int len = 0;
-  int i = 0;
-
-  while(i < s2.length()) {
-    if(s2[i] == s[len]) {
-      ++len;
-      ++i;
-    }
-    else {
-      if(len == 0) { // no prefix
-        ++i;
-      }
-      else { // search for shorter prefixes
-        --len;
-      }
-    }
-  }
-  string t(s.begin(),s.begin()+len);
-  ans=t;
-  return len;
+	b+='$';
+	b+=a;
+	vector<int>Z(b.length(),0);
+	int l=0,r=0,pre;
+	for(int i=1;i<b.length();i++){
+		int c=0;
+		if(i>r){
+			l=r=i;
+			while(r<b.length()&&b[r]==b[r-l]){
+				c++;
+				r++;
+			}
+		}
+		else{
+			if(Z[i-l]>r-i){
+				c=r-i;
+				l=i;
+				while(r<b.length()&&b[r]==b[r-l]){
+					c++;
+					r++;
+				}
+			}
+			else c=Z[i-l];
+		}
+		r--;
+		Z[i]=c;
+	}
+	int x=0;
+	for(int i=0;i<b.length();i++){
+		if(Z[i]+i==b.length()){
+			x=Z[i];
+			break;
+		}
+	}
+	return x;
 
 }
 int main(){
