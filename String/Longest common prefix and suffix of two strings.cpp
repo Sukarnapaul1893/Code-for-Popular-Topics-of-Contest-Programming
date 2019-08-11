@@ -17,7 +17,7 @@
 template <class T> inline T bigmod(T p,T e,T M){ll ret = 1LL;for(; e > 0LL; e >>= 1LL){if(e & 1LL) ret = (ret * p) % M;p = (p * p) % M;}return (T)ret;}
 template <class T> inline T modinverse(T a,T M){return bigmod(a,M-2,M);}   // M is prime}
 using namespace std;
-string ans="";
+//returns the longest prefix length of b which exists as the a suffix of a
 int largest_prefix_suffix(string a, string b) {
 
 	b+='$';
@@ -63,5 +63,6 @@ int main(){
     string s1,s2;
     cin>>s1>>s2;
     int x = largest_prefix_suffix(s1,s2);
-    cout<<ans;
+    cout<<x;
+
 }
