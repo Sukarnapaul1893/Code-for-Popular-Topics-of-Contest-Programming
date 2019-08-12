@@ -1,3 +1,4 @@
+LightOJ-1255 - Substring Frequency
 #include<bits/stdc++.h>
 
 using namespace std;
