@@ -1,84 +1,101 @@
-#include <bits/stdc++.h>
+#pragma warning(disable:4786)
+#pragma warning(disable:4996)
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/trie_policy.hpp>
+#include<ext/pb_ds/detail/standard_policies.hpp>
+#define FOR(i, a, b) for (int i=a; i<(b); i++)
+#define F0R(i, a) for (int i=0; i<(a); i++)
+#define pii pair<int,int>
+#define pll pair<long long ,long long>
+#define pli pair<long long , int>
+#define pil pair<int ,long long>
+#define pi acos(-1)
+#define pb push_back
+#define mkp make_pair
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define ll long long
+#define MAX 300005
+#define INF 0x3f3f3f3f
+#define mset(a,b) memset(a,b,sizeof(a))
+template <class T> inline T bigmod(T p,T e,T M){ll ret = 1LL;for(; e > 0LL; e >>= 1LL){if(e & 1LL) ret = (ret * p) % M;p = (p * p) % M;}return (T)ret;}
+template <class T> inline T modinverse(T a,T M){return bigmod(a,M-2,M);}   // M is prime}
+using namespace std;
+using namespace __gnu_pbds;
+typedef tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
 
-void computeLPSArray(char* pat, int M, int* lps);
+int failure[MAX];
 
-// Prints occurrences of txt[] in pat[]
-void KMPSearch(char* pat, char* txt)
+void build_failure_function(string pattern, int m) {
+  failure[0] = 0;
+  failure[1] = 0; //base case
+
+  for(int i = 2; i <= m; i++) {  //i is length of the prefix we are dealing with
+    // j is the index of the largest next partial match
+    // (the largest suffix/prefix) of the string under index i - 1
+    int j = failure[i - 1];
+    while(true) {
+      // check if the last character of prefix of length i "expands" the current "candidate"
+      if(pattern[j] == pattern[i - 1]) {
+        failure[i] = j + 1;
+        break;
+      }
+      // if we cannot "expand" even the empty string
+      if(j == 0) {
+          failure[i] = 0;
+          break;
+      }
+      // else go to the next best "candidate" partial match
+      j = failure[j];
+    }
+  }
+}
+
+
+bool kmp(string text, string pattern)
 {
-    int M = strlen(pat);
-    int N = strlen(txt);
+  int n = text.size();
+  int m = pattern.size();
+  build_failure_function(pattern, m);
 
-    // create lps[] that will hold the longest prefix suffix
-    // values for pattern
-    int lps[M];
+  int i = 0; // the initial state of the automaton is
+         // the empty string
 
-    // Preprocess the pattern (calculate lps[] array)
-    computeLPSArray(pat, M, lps);
+  int j = 0; // the first character of the text
 
-    int i = 0; // index for txt[]
-    int j = 0; // index for pat[]
-    while (i < N) {
-        if (pat[j] == txt[i]) {
+  while(true) {
+    if(j == n) {
+        return false; //reached the end of the text
+    }
+
+    // character matched
+    if(text[j] == pattern[i]) {
+      i++; // change the state of the automaton
+      j++; // get the next character from the text
+      if(i == m) {
+          return true;
+      }
+    } else {
+        if (i == 0) {
+            // if we reached the empty string and failed to
+            // "expand" even it; we go to the next
+            // character from the text, the state of the
+            // automaton remains zero
             j++;
-            i++;
         }
-
-        if (j == M) {
-            printf("Found pattern at index %d ", i - j);
-            j = lps[j - 1];
-        }
-
-        // mismatch after j matches
-        else if (i < N && pat[j] != txt[i]) {
-            // Do not match lps[0..lps[j-1]] characters,
-            // they will match anyway
-            if (j != 0)
-                j = lps[j - 1];
-            else
-                i = i + 1;
+        else {
+             //we try to "expand" the next best (largest) match
+            i = failure[i];
         }
     }
+  }
+  return false;
 }
 
-// Fills lps[] for given patttern pat[0..M-1]
-void computeLPSArray(char* pat, int M, int* lps)
-{
-    // length of the previous longest prefix suffix
-    int len = 0;
-
-    lps[0] = 0; // lps[0] is always 0
-
-    // the loop calculates lps[i] for i = 1 to M-1
-    int i = 1;
-    while (i < M) {
-        if (pat[i] == pat[len]) {
-            len++;
-            lps[i] = len;
-            i++;
-        }
-        else // (pat[i] != pat[len])
-        {
-            // This is tricky. Consider the example.
-            // AAACAAAA and i = 7. The idea is similar
-            // to search step.
-            if (len != 0) {
-                len = lps[len - 1];
-
-                // Also, note that we do not increment
-                // i here
-            }
-            else // if (len == 0)
-            {
-                lps[i] = 0;
-                i++;
-            }
-        }
-    }
-}
-int main()
-{
-    char txt[] = "ABABDABACDABABCABAB";
-    char pat[] = "ABABCABAB";
-    KMPSearch(pat, txt);
-    return 0;
+int main(){
+	IOS
+	//freopen("output.txt","w",stdout);
+    bool ans = kmp("hello world","ello ");//if "ello " is found in "hello world" as a substring then it will return true
+    if(ans)cout<<"YES";
+    else cout<<"NO";
 }
