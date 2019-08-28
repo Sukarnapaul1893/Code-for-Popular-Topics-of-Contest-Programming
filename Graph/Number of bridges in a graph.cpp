@@ -1,4 +1,4 @@
-//Number of bridges in a graph
+//Number of bridges in a graph (Problem Spoj EC_P)
 
 #pragma warning(disable:4786)
 #pragma warning(disable:4996)
