@@ -81,11 +81,7 @@ int main(){
         mp[vec[i].second]=u;
         update(1,1,n,vec[i].second,u);
     }
-    int mx = 1;
-    for(int i=1;i<=n;i++){
-        mx = max(mx,T[i]);
-    }
-
+    int mx = T[1];
     cout<<mx<<"\n";
     vector<ll>ans;
     int prev=-1;
