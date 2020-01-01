@@ -1,3 +1,4 @@
+//LightOJ 1164 sum of a range (with update a range)
 #pragma warning(disable:4786)
 #pragma warning(disable:4996)
 #include<bits/stdc++.h>
