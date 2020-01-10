@@ -1,8 +1,6 @@
-#pragma warning(disable:4786)
-#pragma warning(disable:4996)
+// Longest common subsequence (LCS)
 #include<bits/stdc++.h>
-#define FOR(i, a, b) for (int i=a; i<(b); i++)
-#define F0R(i, a) for (int i=0; i<(a); i++)
+
 #define pii pair<int,int>
 #define pll pair<long long ,long long>
 #define pli pair<long long , int>
