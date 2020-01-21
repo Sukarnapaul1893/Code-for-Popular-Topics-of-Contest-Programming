@@ -8,7 +8,6 @@ ll arr[30005];
 
 int query(int at, int L, int R, int l, int r,ll k){
     if(r<L || R<l)return 0;
-
     if(l<=L && R<=r){
         int cnt = upper_bound(data[at].begin(),data[at].end(),k)-data[at].begin();
         return (data[at].size()-cnt);
@@ -21,9 +20,6 @@ int query(int at, int L, int R, int l, int r,ll k){
 
     return (x+y);
 }
-
-
-
 void build(int at , int L, int R){
     if(L==R){
         data[at].pb(arr[L]);
@@ -51,16 +47,9 @@ void build(int at , int L, int R){
     }
 
 }
-
-
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int n;
-    cin>>n;
-
-
+    ios::sync_with_stdio(false);   cin.tie(0);cout.tie(0);
+    int n; cin>>n;
     for(int i=1;i<=n;i++){
         cin>>arr[i];
     }
