@@ -1,3 +1,4 @@
+//LightOJ 1096
 #include<bits/stdc++.h>
 
 #define pb push_back
