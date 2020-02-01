@@ -1,0 +1,11 @@
+//Disjoint Set Union
+int p[100]; //initially p[i] = i;
+int Find(int x)
+{
+    if(p[x] == x) return x;
+    return p[x] = Find(p[x]);
+}
+void Union(int a, int b)
+{
+    p[Find(b)] = Find(a); // Making the parent of a and b same
+}
