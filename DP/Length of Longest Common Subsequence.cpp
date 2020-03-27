@@ -1,38 +1,70 @@
-/* Length of longest common subsequence */
 #include<bits/stdc++.h>
-int max(int a, int b);
-/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
-int lcs( char *X, char *Y, int m, int n ){
-   int L[m+1][n+1];
-   int i, j;
-   /* Following steps build L[m+1][n+1] in bottom up fashion. Note
-      that L[i][j] contains length of LCS of X[0..i-1] and Y[0..j-1] */
-   for (i=0; i<=m; i++)
-   {
-     for (j=0; j<=n; j++)
-     {
-       if (i == 0 || j == 0)
-         L[i][j] = 0;
+using namespace std;
 
-       else if (X[i-1] == Y[j-1])
-         L[i][j] = L[i-1][j-1] + 1;
+string Minstring(string x, string y)
+{
+	if(x.length() < y.length()) {
+		return y;
+	}
 
-       else
-         L[i][j] = max(L[i-1][j], L[i][j-1]);
-     }
-   }
-   /* L[m][n] contains length of LCS for X[0..n-1] and Y[0..m-1] */
-   return L[m][n];
+	if(x.length() > y.length()) {
+		return x;
+	}
+
+	for (int i = 0; i < x.length(); i++) {
+		if(x[i] < y[i]) {
+			return x;
+		}
+
+		if(x[i] > y[i]) {
+			return y;
+		}
+	}
+	return x;
 }
-/* Utility function to get max of 2 integers */
-int max(int a, int b){
-    return (a > b)? a : b;
-}
-int main(){
-  char X[] = "AGGTAB";
-  char Y[] = "GXTXAYB";
-  int m = strlen(X);
-  int n = strlen(Y);
-  printf("Length of LCS is %d", lcs( X, Y, m, n ) );
-  return 0;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+	int t;
+	cin>>t;
+	for (int tt = 0; tt < t; tt++) {
+        string x;
+        string y;
+
+		string dp[110][110];
+        cin>>x>>y;
+
+        int n;
+        int m;
+		n = x.length();
+		m = y.length();
+
+		for (int i = n; i >= 0; i--) {
+			for (int j = m; j >= 0; j--) {
+				if(i == n or j == m) {
+					dp[i][j] = "";
+					continue;
+				}
+
+				if(x[i] == y[j]) {
+					dp[i][j] = x[i] + dp[i+1][j+1];
+					continue;
+				}
+
+				dp[i][j] = Minstring(dp[i+1][j],dp[i][j+1]);
+			}
+		}
+
+		if(dp[0][0].length() != 0) {
+            cout<<"Case "<<tt+1<<": "<<dp[0][0]<<"\n";
+		}
+
+		else {
+			cout<<"Case "<<tt+1<<": "<<":("<<"\n";
+		}
+
+	}
+
 }
