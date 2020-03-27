@@ -1,3 +1,4 @@
+//collected from : https://github.com/hackerkid/LightOJ-Solutions/blob/master/1110-An-Easy-LCS.cpp
 #include<bits/stdc++.h>
 using namespace std;
 
