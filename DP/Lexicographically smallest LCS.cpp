@@ -86,7 +86,7 @@ int main()
 		}
 
 		else {
-			printf("Case %d: :(\n", cs);
+			printf("Case %d: :(\n", cs); //If length is 0;
 		}
 
 	}
