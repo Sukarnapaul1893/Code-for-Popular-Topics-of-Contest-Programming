@@ -1,5 +1,5 @@
 typedef long long LL;
-const int M = 998244353;
+const int M = 998244353; //M must be larger than N
  
 LL power(LL a, LL p) {
     if (p == 0) return 1;
