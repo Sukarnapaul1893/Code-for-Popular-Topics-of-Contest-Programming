@@ -1,3 +1,4 @@
+//returns the number of coprimes less than x
 LL phi(LL x) {
     LL ans = x;
  
