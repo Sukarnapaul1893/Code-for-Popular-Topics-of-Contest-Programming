@@ -77,18 +77,21 @@ struct LinkCut {
     splay(_u);
   }
 
+  //add an edge between u and v
   void Link(int u, int v) {
     assert(!Connected(u, v));
     MakeRoot(v);
     T[v].pp = u;
   }
-
+  
+  //remove the edge between u and v
   void Cut(int u, int v) {
     MakeRoot(u); Access(u); splay(v);
     assert(T[v].pp == u);
     T[v].pp = 0;
   }
-
+  
+  //Checks if u and v are connected 
   bool Connected(int u, int v) {
     if (u == v) return true;
     MakeRoot(u); Access(v); splay(u);
