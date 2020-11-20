@@ -16,11 +16,12 @@ void dfs(int v, int p = -1) {
         } else {
             dfs(to, v);
             low[v] = min(low[v], low[to]);
-            if (low[to] >= tin[v] && p!=-1)
-                IS_CUTPOINT(v);
+            if (low[to] >= tin[v] && p!=-1) //For articulation edges us '>' and don't check p!=-1
+                IS_CUTPOINT(v); //For articulation edges pass v,to as parameter
             ++children;
         }
     }
+    //For articulation edges this part is not needed
     if(p == -1 && children > 1)
         IS_CUTPOINT(v);
 }
