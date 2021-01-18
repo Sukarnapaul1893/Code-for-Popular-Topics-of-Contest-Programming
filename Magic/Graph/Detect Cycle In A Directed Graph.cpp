@@ -1,4 +1,4 @@
-//detect cycle
+//detect cycle in a directed graph
 
 /* initially all vertices are colored 0. 
    Now when dfs starts from some vertex, we will color it to 1.
