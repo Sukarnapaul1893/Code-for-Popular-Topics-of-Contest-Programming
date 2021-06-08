@@ -1,5 +1,14 @@
+#define ld long double
+
 struct point{
-    ll x,y;
+    ld x,y;
+    point(){};
+    point(ld xx, ld yy){x=xx; y=yy;};
+
+    point operator+ (point p){return point(x+p.x,y+p.y);};
+    point operator- (point p){return point(x-p.x,y-p.y);};
+    point operator* (ld p){return point(x*p,y*p);};
+    point operator/ (ld p){return point(x/p,y/p);};
 };
 
 point p[3];
