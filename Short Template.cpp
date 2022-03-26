@@ -4,9 +4,9 @@
 
 using namespace std;
 
-void input();
+void Input();
 
-void solve(){
+void Solve(){
 
 }
 
@@ -18,9 +18,12 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-
+    Intput();
+    Solve();
+    Clear();
+    
 }
 
-void input(){
+void Input(){
     
 }
