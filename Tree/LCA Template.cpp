@@ -4,7 +4,7 @@ const int LG = log2(MAXN) + 1;
 int par[MAXN][LG];
 
 vector<int>adj[50005];
-vector<int>adj2[MAXN];
+
 bool vis[50005];
 int level[50005];
 
